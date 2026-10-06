@@ -1,5 +1,5 @@
 // 記帳本 離線快取：有網路時抓最新版，沒網路時用手機裡的備份版本
-const CACHE = 'ledger-v1.1.0';
+const CACHE = 'ledger-v1.2.0';
 const ASSETS = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
 
 self.addEventListener('install', e => {
