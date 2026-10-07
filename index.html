@@ -182,6 +182,13 @@ main .seg{background:var(--track)}
   .cat span{width:38px;height:38px;font-size:18px}.cat{padding:3px 0}
   .lbl{margin:8px 2px 4px}.meta{margin-top:10px}
 }
+.t-invest{--type:var(--inv);--type-soft:var(--inv-soft)}
+.typeseg button{padding:0 2px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.fld span{display:block;font-size:12.5px;color:var(--ink3);font-weight:700;margin:0 2px 6px}
+.fld input{width:100%;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface2);padding:0 12px;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.codename{min-height:20px;font-size:13px;color:var(--ink2);padding:6px 2px 4px}.codename b{color:var(--inv)}
+.warn{color:var(--exp)}
 .notice{background:var(--card-soft);border-radius:12px;padding:12px 14px;font-size:14px;margin-top:12px}
 
 /* forms */
@@ -244,10 +251,45 @@ svg.flask.ended .ol,svg.flask.ended .lip{stroke:var(--ink3)}svg.flask.ended .bub
 .rv-h{display:flex;justify-content:space-between;font-size:14px;font-weight:700}
 .rv-h .neg{color:var(--exp)}.rv small{display:block;font-size:12px;color:var(--ink3);margin-top:3px}
 .drow{display:flex;gap:8px;align-items:center}.drow em{font-style:normal;color:var(--ink2);font-size:14px}
+.drow select{height:48px;border-radius:13px;border:1px solid var(--line);background:var(--surface2);padding:0 10px;font-size:15px;color:var(--ink)}
 .drow input{flex:1;min-width:0;height:48px;border-radius:13px;border:1px solid var(--line);background:var(--surface2);padding:0 10px;font-size:15px}
 .sh-body .sum3 div+div{border-color:var(--surface)}
 .chips.wrap{flex-wrap:wrap;overflow:visible}
 .field select{width:100%;height:48px;border-radius:13px;border:1px solid var(--line);background:var(--surface2);padding:0 12px;font-size:16px;color:var(--ink)}
+/* investment */
+:root{--inv:#6E56CF;--inv-soft:#ECE8FB}
+@media (prefers-color-scheme:dark){:root{--inv:#A894F7;--inv-soft:#2A2448}}
+.ico.inv{background:var(--inv-soft)}.ra.inv,.cf-amt.invest{color:var(--inv)}
+.up{color:var(--exp)!important}.down{color:var(--inc)!important}
+.hero-top>.pill{min-width:0;max-width:none;flex:0 1 auto}
+.hero-top .rgt{display:flex;gap:8px;flex:none}
+.inv-pill{background:var(--inv-soft);border-color:transparent;padding:0 12px;font-size:16px}
+.inv-sum{background:var(--surface2);border-radius:16px;padding:16px;text-align:center;margin-bottom:12px}
+.inv-sum small{display:block;font-size:13px;color:var(--ink2);font-weight:600}
+.inv-sum b{display:block;font-size:32px;font-weight:800;line-height:1.25}
+.inv-sum>span{display:block;font-size:14px;font-weight:700;margin-top:2px}
+.inv-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink3);margin-top:8px}
+.inv-meta em{font-style:normal;font-weight:700}
+.btn.inv{background:var(--inv);color:#fff}
+@media (prefers-color-scheme:dark){.btn.inv{color:#0E141A}}
+.rv2{display:flex;flex-direction:column;align-items:flex-end;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rv2 b{font-size:15.5px;font-weight:700}.rv2 small{font-size:12.5px;font-weight:700;color:var(--ink3)}
+.kv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.kv div{background:var(--surface2);border-radius:12px;padding:10px 8px;text-align:center}
+.kv small{display:block;font-size:12px;color:var(--ink3);font-weight:600}
+.kv b{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums}.kv em{font-style:normal}
+/* reminders */
+.badge{font-size:11.5px;font-weight:800;color:var(--exp);background:var(--exp-soft);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.nx{font-size:12px;color:var(--ink3);white-space:nowrap}
+.rem-list{display:flex;flex-direction:column;gap:2px;margin:4px 0 14px;max-height:52vh;overflow:auto}
+.rem{display:flex;align-items:center;gap:10px;padding:10px 2px;text-align:left}
+.rem+.rem{border-top:1px solid var(--line)}
+.rem .ico{width:36px;height:36px;font-size:18px}
+.rem .rt small{white-space:normal}
+.rem-b{display:flex;gap:6px;flex:none}
+.mini{height:34px;padding:0 11px;border-radius:10px;font-weight:700;font-size:13px;background:var(--surface2);white-space:nowrap}
+.mini.pri{background:var(--brand);color:var(--on-brand)}
+.field select+select{margin-top:0}.drow select{flex:1;min-width:0}
 /* account picker checkboxes */
 .ck{width:24px;height:24px;border-radius:7px;border:2px solid var(--ink3);display:grid;place-items:center;flex:none;font-size:14px;font-weight:900;color:var(--on-brand)}
 .ck.on{background:var(--brand);border-color:var(--brand)}
@@ -286,13 +328,14 @@ svg.flask.ended .ol,svg.flask.ended .lip{stroke:var(--ink3)}svg.flask.ended .bub
 
 <script>
 'use strict';
-const APP_VERSION='1.2.0';
+const APP_VERSION='1.3.0';
+const PRICE_API='https://ledger-price.lianzhi216.workers.dev/';
 const KEY='ledger.v1';
 const $=s=>document.querySelector(s);
 const EMOJIS=['🍱','🍜','🍔','☕','🧋','🍎','🍰','🍺','🚌','🚇','🚕','🛵','🚲','⛽','🅿️','✈️','🛍️','👕','👟','💄','🎮','🎬','🎵','🎤','🏐','🏀','🏸','🏋️','🏊','📚','✏️','💻','📱','🎧','🧴','🧻','🏠','💡','💧','📶','💊','🏥','✂️','🎁','💝','🐶','🧾','📦','💰','💼','🎓','🏦','📈','🧧','✨','💵','💳','📮','🐷','🎫','🗂️','⭐'];
 const KIND={transfer:{label:'轉帳',icon:'🔁'},withdraw:{label:'提款',icon:'🏧'},deposit:{label:'存款',icon:'📥'}};
-const TYPE_LABEL={expense:'支出',income:'收入',transfer:'轉移',card:'交通卡'};
-const TYPE_CLS={expense:'exp',income:'inc',transfer:'mov',card:'card'};
+const TYPE_LABEL={expense:'支出',income:'收入',transfer:'轉移',card:'交通卡',invest:'投資'};
+const TYPE_CLS={expense:'exp',income:'inc',transfer:'mov',card:'card',invest:'invest'};
 const PALETTE=['#E0464B','#EE8A2A','#D9AE1E','#13966A','#26A1A6','#3B76D0','#7A5AF0','#C2549D','#8C6D4A','#7F8C99'];
 const RIDE_NOTES=['捷運','公車','火車','客運','YouBike','超商'];
 const ICON_CHEV='<svg class="chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>';
@@ -319,8 +362,8 @@ function defaults(){
     cards:[{id:'c1',name:'悠遊卡',icon:'🚇',initial:0}],
     categories:{
       expense:[{id:'e1',name:'餐飲',icon:'🍱'},{id:'e2',name:'交通',icon:'🚌',sys:'transport'},{id:'e3',name:'購物',icon:'🛍️'},{id:'e4',name:'娛樂',icon:'🎮'},{id:'e5',name:'運動',icon:'🏐'},{id:'e6',name:'學業',icon:'📚'},{id:'e7',name:'生活用品',icon:'🧴'},{id:'e8',name:'醫療',icon:'💊'},{id:'e9',name:'其他',icon:'📦'}],
-      income:[{id:'i1',name:'生活費',icon:'💰'},{id:'i2',name:'打工',icon:'💼'},{id:'i3',name:'獎學金',icon:'🎓'},{id:'i4',name:'利息',icon:'🏦'},{id:'i5',name:'其他',icon:'✨'}]},
-    tx:[],budgets:[],meta:{last:{},lastCat:{},confirm:true,filter:'all'}};
+      income:[{id:'i1',name:'生活費',icon:'💰'},{id:'i2',name:'打工',icon:'💼'},{id:'i3',name:'獎學金',icon:'🎓'},{id:'i4',name:'利息',icon:'🏦'},{id:'i6',name:'股利',icon:'📈'},{id:'i5',name:'其他',icon:'✨'}]},
+    tx:[],budgets:[],reminders:[],stocks:{},meta:{last:{},lastCat:{},confirm:true,filter:'all',prices:{}}};
 }
 function normalize(o){
   const d=defaults();
@@ -331,16 +374,20 @@ function normalize(o){
                 income:Array.isArray(o.categories?.income)?o.categories.income:d.categories.income},
     tx:Array.isArray(o.tx)?o.tx:[],
     budgets:Array.isArray(o.budgets)?o.budgets.slice(0,4):[],
+    reminders:Array.isArray(o.reminders)?o.reminders:[],
+    stocks:(o.stocks&&typeof o.stocks==='object')?o.stocks:{},
     meta:(o.meta&&typeof o.meta==='object')?o.meta:{}};
   db.meta.last=db.meta.last||{};
   db.meta.lastCat=db.meta.lastCat||{};
+  db.meta.prices=(db.meta.prices&&typeof db.meta.prices==='object')?db.meta.prices:{};
+  db.reminders.forEach(r=>{r.amount=Number(r.amount)||0;if(!['week','month','year'].includes(r.freq))r.freq='month';r.day=Number(r.day)||1;r.month=Number(r.month)||0;r.wday=Number(r.wday)||0;if(!/^\d{4}-\d\d-\d\d$/.test(r.doneUntil||''))r.doneUntil=ymd(new Date(Date.now()-864e5))});
   if(db.meta.confirm===undefined)db.meta.confirm=true;
   if(!Array.isArray(db.meta.filter))db.meta.filter='all';
   db.budgets.forEach(b=>{b.amount=Number(b.amount)||0;b.startDay=Math.min(28,Math.max(1,Number(b.startDay)||1));
     if(!['day','week','month','custom'].includes(b.period))b.period='month';
     if(b.period==='custom'&&!(b.from&&b.to))b.period='month';
     b.weekStart=Math.min(6,Math.max(0,Number(b.weekStart)||0))});
-  db.tx.forEach(t=>{t.amount=Number(t.amount)||0;t.note=t.note||''});
+  db.tx.forEach(t=>{t.amount=Number(t.amount)||0;t.note=t.note||'';if(t.shares!==undefined)t.shares=Number(t.shares)||0});
   db.accounts.forEach(a=>{a.initial=Number(a.initial)||0});
   db.cards.forEach(c=>{c.initial=Number(c.initial)||0});
   return db;
@@ -360,6 +407,8 @@ function accDelta(t,id){
     case 'income':return t.accountId===id?t.amount:0;
     case 'expense':case 'topup':return t.accountId===id?-t.amount:0;
     case 'transfer':return(t.toAccountId===id?t.amount:0)-(t.accountId===id?t.amount:0);
+    case 'buy':return t.accountId===id?-t.amount:0;
+    case 'sell':return t.accountId===id?t.amount:0;
   }return 0;
 }
 const accBalance=a=>r2(db.tx.reduce((s,t)=>s+accDelta(t,a.id),a.initial||0));
@@ -392,6 +441,62 @@ function filterLabel(){
 }
 const cmpTx=(a,b)=>b.date.localeCompare(a.date)||(b.created||0)-(a.created||0);
 
+/* ---------- 投資：持股、平均成本、損益 ---------- */
+const CODE_RE=/^[0-9A-Z]{4,6}$/;
+const stockName=c=>db.stocks[c]||db.meta.prices[c]?.name||'';
+const stockLabel=c=>esc(c)+(stockName(c)?' '+esc(stockName(c)):'');
+/* 依日期順序重算：買進加股數與成本；賣出依平均成本扣掉成本，差額是已實現損益 */
+function holdingsMap(excludeId){
+  const m={};
+  db.tx.filter(t=>(t.type==='buy'||t.type==='sell')&&t.id!==excludeId)
+    .sort((a,b)=>a.date.localeCompare(b.date)||(a.created||0)-(b.created||0))
+    .forEach(t=>{
+      const h=m[t.code]||(m[t.code]={code:t.code,shares:0,cost:0,realized:0,invested:0,txs:[]});
+      h.txs.push(t);
+      if(t.type==='buy'){h.shares+=t.shares;h.cost+=t.amount;h.invested+=t.amount}
+      else{const n=Math.min(t.shares,Math.max(0,h.shares)),cs=h.shares>0?h.cost*n/h.shares:0;
+        h.cost-=cs;h.shares-=t.shares;h.realized+=t.amount-cs;if(h.shares<=0){h.shares=Math.max(0,h.shares);h.cost=0}}
+    });
+  Object.values(m).forEach(h=>{h.cost=r2(h.cost);h.realized=r2(h.realized);
+    const p=db.meta.prices[h.code];h.price=p?.price||null;h.value=h.price!=null?r2(h.price*h.shares):null;
+    h.pl=h.value!=null?r2(h.value-h.cost):null;h.avg=h.shares>0?h.cost/h.shares:0});
+  return m;
+}
+function investSummary(){
+  const hs=Object.values(holdingsMap()),held=hs.filter(h=>h.shares>0);
+  const cost=r2(held.reduce((s,h)=>s+h.cost,0)),realized=r2(hs.reduce((s,h)=>s+h.realized,0));
+  const priced=held.every(h=>h.value!=null);
+  const value=priced?r2(held.reduce((s,h)=>s+h.value,0)):null;
+  return{hs,held,cost,realized,value,pl:value!=null?r2(value-cost):null};
+}
+const priceState={loading:false,error:false};
+async function fetchPrices(codes,force){
+  codes=[...new Set(codes.filter(c=>CODE_RE.test(c)))];if(!codes.length)return false;
+  const now=Date.now();
+  if(!force&&codes.every(c=>db.meta.prices[c]&&now-db.meta.prices[c].at<60000))return true;
+  priceState.loading=true;priceState.error=false;
+  try{
+    const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),9000);
+    const r=await fetch(PRICE_API+'?codes='+codes.join(','),{signal:ctl.signal});clearTimeout(tm);
+    if(!r.ok)throw new Error(r.status);
+    const data=await r.json();
+    codes.forEach(c=>{const d=data[c];if(d&&d.price){db.meta.prices[c]={price:+d.price,name:d.name||'',time:d.time||'',at:now};if(d.name)db.stocks[c]=d.name}});
+    save();priceState.loading=false;
+    return codes.some(c=>data[c]);
+  }catch(e){priceState.loading=false;priceState.error=true;return false}
+  finally{if(sheets.length)rs();if(ui.tab==='accounts')$('#view').innerHTML=VIEWS[ui.tab]()}
+}
+function priceTimeLabel(codes){
+  const ps=codes.map(c=>db.meta.prices[c]).filter(Boolean);
+  if(priceState.loading)return'正在更新股價…';
+  if(!ps.length)return priceState.error?'無法取得股價，目前只顯示投入成本':'';
+  const p=ps.sort((a,b)=>b.at-a.at)[0],m=/(\d{4})-(\d\d)-(\d\d)\s+(\d\d:\d\d)/.exec(p.time||'');
+  const t=m?`${+m[2]}/${+m[3]} ${m[4]}`:p.time||new Date(p.at).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  return`股價時間：${t}`+(priceState.error?'（這次更新失敗，顯示上次的股價）':'');
+}
+const plCls=v=>v>0?'up':v<0?'down':'';
+const pct=(a,b)=>b>0?(a/b*100).toFixed(2)+'%':'';
+
 /* ---------- shared pieces ---------- */
 function donut(segs,{size=260,r=112,sw=16}={}){
   const c=size/2,C=2*Math.PI*r,tot=segs.reduce((s,x)=>s+x.v,0);
@@ -413,6 +518,10 @@ function txRow(t,ctx={}){
     const c=card(t.cardId);icon=c?.icon||'🚇';title=`儲值 ${esc(c?.name||'交通卡')}`;
     sub=[(ctx.card?'從 ':'')+accName(t.accountId),note].filter(Boolean).join('　');
     if(ctx.card){cls='inc';amt=money(t.amount,true)}else{cls='exp';amt=money(-t.amount,true)}
+  }else if(t.type==='buy'||t.type==='sell'){
+    const b=t.type==='buy';icon=b?'📈':'💹';title=`${b?'買進':'賣出'} ${stockLabel(t.code)}`;cls='inv';
+    sub=[`${accName(t.accountId)}　${t.shares.toLocaleString('zh-TW')} 股`,note].filter(Boolean).join('　');
+    amt=money(b?-t.amount:t.amount,true);
   }else{
     const c=card(t.cardId);icon='🎫';title=note||'扣款';sub=esc(c?.name||'交通卡')+' 扣款';cls='exp';amt=money(-t.amount,true);
   }
@@ -532,7 +641,7 @@ function viewHome(){
   let h=`<section class="hero">
     <div class="hero-top">
       <button class="pill" data-a="pickAcc" aria-label="切換帳戶"><span class="pl">${filterLabel()}</span> ${ICON_DOWN}</button>
-      ${db.cards.length?`<button class="pill card-pill" data-a="cards" aria-label="交通卡餘額">🚇 <b class="num">${money(cardsTot)}</b></button>`:''}
+      <span class="rgt"><button class="pill inv-pill" data-a="invest" aria-label="投資">📈</button>${db.cards.length?`<button class="pill card-pill" data-a="cards" aria-label="交通卡餘額">🚇 <b class="num">${money(cardsTot)}</b></button>`:''}</span>
     </div>
     ${mid}
     <div class="legend"><span><i class="dot inc"></i>收入</span><span><i class="dot exp"></i>支出</span><span class="muted">本月比例</span></div>
@@ -619,6 +728,9 @@ function viewAccounts(){
   h+=`<div class="sec"><span style="font-size:14px;color:var(--ink2);font-weight:800">交通卡</span><span>不計入總餘額</span></div><div class="group">`;
   h+=db.cards.map(c=>{const b=cardBalance(c);return`<button class="row" data-a="cardDetail" data-v="${c.id}"><span class="ico card">${c.icon}</span><span class="rt"><b>${esc(c.name)}</b><small>點開看儲值與扣款明細</small></span><span class="ra bal" style="color:${b<0?'var(--exp)':'var(--card)'}">${money(b)}</span>${ICON_CHEV}</button>`}).join('');
   h+=`<button class="row addrow" data-a="newCard"><span class="ico">＋</span><span class="rt"><b>新增交通卡</b></span></button></div>`;
+  const S=investSummary();
+  h+=`<div class="sec"><span style="font-size:14px;color:var(--ink2);font-weight:800">投資</span><span>不計入總餘額</span></div><div class="group">
+    <button class="row" data-a="invest"><span class="ico inv">📈</span><span class="rt"><b>股票</b><small>${S.held.length?`${S.held.length} 檔持股　投入成本 ${m0(S.cost)}`:'點開記錄買進的股票'}</small></span><span class="rv2"><b>${m0(S.value!=null?S.value:S.cost)}</b>${S.pl!=null&&S.held.length?`<small class="${plCls(S.pl)}">${m0(S.pl,true)}</small>`:''}</span>${ICON_CHEV}</button></div>`;
   h+=`<p class="hint">點帳戶可以改名稱、圖示，或把「目前餘額」改成跟銀行一致。</p>`;
   return h;
 }
@@ -633,6 +745,9 @@ function viewSettings(){
   h+=db.budgets.map(b=>{const sc=budgetScope(b);return`<button class="row" data-a="editBudget" data-v="${b.id}"><span class="ico">🧪</span><span class="rt"><b>${esc(b.name)}</b><small>${budgetDesc(b)}${budgetStatus(b)==='ended'?'（已結束）':''}，${esc(sc.an)}，${esc(sc.cn)}</small></span><span class="ra bal">${money(b.amount)}</span>${ICON_CHEV}</button>`}).join('');
   if(db.budgets.length<4)h+=`<button class="row addrow" data-a="newBudget"><span class="ico">＋</span><span class="rt"><b>新增預算</b></span></button>`;
   h+=`</div>`;
+  h+=`<div class="sec">定期提醒<span>到期後打開 App 會提醒你記帳</span></div><div class="group">`;
+  h+=db.reminders.map(r=>{const p=remPending(r);return`<button class="row" data-a="remEdit" data-v="${r.id}"><span class="ico">${REM_ICON[r.type]}</span><span class="rt"><b>${esc(r.name)}</b><small>${remDesc(r)}</small></span>${p?'<span class="badge">待記帳</span>':`<span class="nx">下次 ${md(parseD(remNext(r)))}</span>`}${ICON_CHEV}</button>`}).join('');
+  h+=`<button class="row addrow" data-a="remNew"><span class="ico">＋</span><span class="rt"><b>新增提醒</b><small>例如定期定額、電信費、訂閱費</small></span></button></div>`;
   h+=`<div class="sec">分類</div><div class="seg" style="margin-bottom:10px">${[['expense','支出分類'],['income','收入分類']].map(([k,l])=>`<button class="${t===k?'on':''}" data-a="setCat" data-v="${k}">${l}</button>`).join('')}</div><div class="group">`;
   h+=cats.map(c=>`<button class="row" data-a="editCat" data-v="${c.id}"><span class="ico">${c.icon}</span><span class="rt"><b>${esc(c.name)}</b>${c.sys==='transport'?'<small>交通卡儲值也會算在這裡</small>':''}</span>${ICON_CHEV}</button>`).join('');
   h+=`<button class="row addrow" data-a="newCat"><span class="ico">＋</span><span class="rt"><b>新增${t==='income'?'收入':'支出'}分類</b></span></button></div>`;
@@ -680,18 +795,39 @@ function applyDefaults(f){
     if(!acc(f.accountId))f.accountId=lastAcc(f.type);
   }else if(f.type==='transfer'){
     if(!acc(f.accountId)||!acc(f.toAccountId)||f.accountId===f.toAccountId)kindDefaults(f);
+  }else if(f.type==='invest'){
+    if(!['buy','sell'].includes(f.isub))f.isub='buy';
+    if(!acc(f.accountId))f.accountId=lastAcc('invest');
+    if(f.code===undefined)f.code='';if(f.shares===undefined)f.shares='';
   }else{
     if(!card(f.cardId))f.cardId=db.cards[0]?.id;
     if(!acc(f.accountId))f.accountId=lastAcc('topup');
   }
 }
-function newForm(type,extra={}){const f=Object.assign({type,expr:'',date:today(),note:'',kind:db.meta.lastKind||'transfer',sub:db.meta.lastSub||'topup'},extra);applyDefaults(f);return f}
+function newForm(type,extra={}){const f=Object.assign({type,expr:'',date:today(),note:'',kind:db.meta.lastKind||'transfer',sub:db.meta.lastSub||'topup',isub:'buy'},extra);applyDefaults(f);return f}
 function addSheet(f){return{f,cls:()=>'t-'+TYPE_CLS[f.type],render:()=>renderAdd(f)}}
 function chips(list,key,f,cur){return`<div class="chips">${list.map(x=>`<button class="chip ${cur===x.id?'on':''}" data-a="fSet" data-k="${key}" data-v="${x.id}">${x.icon} ${esc(x.name)}</button>`).join('')}</div>`}
+function codeInfo(f){
+  const c=(f.code||'').toUpperCase();if(!c)return'';
+  if(!CODE_RE.test(c))return'<span class="warn">股票代號是 4～6 碼，例如 0050、2330</span>';
+  const h=holdingsMap(f.editId)[c],nm=stockName(c);
+  let s=nm?`<b>${esc(nm)}</b>`:(lookup.c===c&&lookup.busy?'查詢中…':'');
+  if(h&&h.shares>0)s+=`${s?'　':''}目前持有 ${h.shares.toLocaleString('zh-TW')} 股，均價 ${money(h.avg)}`;
+  else if(f.isub==='sell')s+=`${s?'　':''}<span class="warn">目前沒有持有這檔股票</span>`;
+  return s;
+}
+const lookup={c:'',busy:false,t:0};
+function lookupName(f){
+  const c=(f.code||'').toUpperCase();
+  const show=()=>{const el=$('#codeName');if(el)el.innerHTML=codeInfo(f)};
+  clearTimeout(lookup.t);lookup.c=c;show();
+  if(!CODE_RE.test(c)||stockName(c))return;
+  lookup.t=setTimeout(async()=>{lookup.busy=true;show();await fetchPrices([c]);lookup.busy=false;if(lookup.c===c)show()},500);
+}
 function renderAdd(f){
   const t=f.type;
   let h=head(f.editId?'修改紀錄':'記一筆','<button class="txt" data-a="close">取消</button>',f.editId?'<button class="txt danger" data-a="delTx">刪除</button>':'<span class="txt"></span>');
-  h+=`<div class="seg typeseg">${['expense','income','transfer','card'].map(k=>`<button class="${t===k?'on':''}" data-a="fType" data-v="${k}">${TYPE_LABEL[k]}</button>`).join('')}</div>`;
+  h+=`<div class="seg typeseg">${['expense','income','transfer','card','invest'].map(k=>`<button class="${t===k?'on':''}" data-a="fType" data-v="${k}">${TYPE_LABEL[k]}</button>`).join('')}</div>`;
   h+=`<div class="amt-box"><span class="cur">$</span><span id="expr"></span><small id="exprRes"></small></div><div class="sh-body">`;
   if(t==='expense'||t==='income'){
     h+=`<div class="lbl">分類</div><div class="cats">${db.categories[t].map(c=>`<button class="cat ${f.categoryId===c.id?'on':''}" data-a="fSet" data-k="categoryId" data-v="${c.id}"><span>${c.icon}</span><em>${esc(c.name)}</em></button>`).join('')}</div>`;
@@ -700,6 +836,15 @@ function renderAdd(f){
     h+=`<div class="lbl">種類</div><div class="seg">${Object.entries(KIND).map(([k,v])=>`<button class="${f.kind===k?'on':''}" data-a="fKind" data-v="${k}">${v.icon} ${v.label}</button>`).join('')}</div>`;
     h+=`<div class="lbl">從</div>`+chips(db.accounts,'accountId',f,f.accountId);
     h+=`<div class="lbl">到</div>`+chips(db.accounts,'toAccountId',f,f.toAccountId);
+  }else if(t==='invest'){
+    const buy=f.isub==='buy',hm=holdingsMap(f.editId),held=Object.values(hm).filter(x=>x.shares>0);
+    h+=`<div class="lbl">要記什麼</div><div class="seg"><button class="${buy?'on':''}" data-a="fISub" data-v="buy">買進</button><button class="${!buy?'on':''}" data-a="fISub" data-v="sell">賣出</button></div>`;
+    h+=`<p class="hint" style="padding:8px 2px 0">上面的金額請填${buy?'<b>銀行實際扣款金額</b>（已含手續費）':'<b>實際入帳金額</b>（已扣手續費和稅）'}</p>`;
+    h+=`<div class="frow"><label class="fld"><span>股票代號</span><input data-f="code" value="${esc(f.code)}" maxlength="6" placeholder="0050" autocapitalize="characters" autocomplete="off" enterkeyhint="next"></label>
+      <label class="fld"><span>${buy?'買到幾股':'賣了幾股'}</span><input data-f="shares" value="${esc(f.shares)}" inputmode="numeric" placeholder="6" enterkeyhint="done"></label></div>
+      <div class="codename" id="codeName">${codeInfo(f)}</div>`;
+    if(held.length)h+=`<div class="chips">${held.map(x=>`<button class="chip ${f.code===x.code?'on':''}" data-a="fCode" data-v="${x.code}">${stockLabel(x.code)}</button>`).join('')}</div>`;
+    h+=`<div class="lbl">${buy?'從哪個帳戶扣款':'賣出的錢存進哪個帳戶'}</div>`+chips(db.accounts,'accountId',f,f.accountId);
   }else{
     if(!db.cards.length){h+=`<div class="notice">還沒有交通卡。先新增一張，就能記錄儲值和扣款。</div><button class="btn" data-a="newCard">新增交通卡</button>`}
     else{
@@ -752,6 +897,14 @@ function buildTx(f){
     if(!acc(f.accountId)||!acc(f.toAccountId)){toast('請選擇兩個帳戶');return null}
     if(f.accountId===f.toAccountId){toast('「從」和「到」不能是同一個帳戶');return null}
     Object.assign(t,{type:'transfer',kind:f.kind,accountId:f.accountId,toAccountId:f.toAccountId});
+  }else if(f.type==='invest'){
+    const code=(f.code||'').trim().toUpperCase(),n=Number(String(f.shares).replace(/[,\s]/g,''));
+    if(!CODE_RE.test(code)){toast('請輸入正確的股票代號，例如 0050');return null}
+    if(!Number.isInteger(n)||n<=0){toast('股數請輸入大於 0 的整數');return null}
+    if(!acc(f.accountId)){toast('請選擇帳戶');return null}
+    if(f.isub==='sell'){const h=holdingsMap(f.editId)[code],have=h?h.shares:0;
+      if(n>have){toast(have?`目前只有 ${have} 股，不能賣 ${n} 股`:'目前沒有持有這檔股票');return null}}
+    Object.assign(t,{type:f.isub==='sell'?'sell':'buy',code,shares:n,accountId:f.accountId});
   }else{
     if(!card(f.cardId)){toast('請先新增交通卡');return null}
     if(f.sub==='topup'){if(!acc(f.accountId)){toast('請選擇儲值用的帳戶');return null}Object.assign(t,{type:'topup',cardId:f.cardId,accountId:f.accountId})}
@@ -770,6 +923,8 @@ function commitTx(t,f,n){
   const m=db.meta;
   if(t.type==='expense'||t.type==='income'){m.last[t.type]=t.accountId;m.lastCat[t.type]=t.categoryId}
   if(t.type==='topup')m.last.topup=t.accountId;
+  if(t.type==='buy'||t.type==='sell'){m.last.invest=t.accountId;if(!db.stocks[t.code]&&db.meta.prices[t.code]?.name)db.stocks[t.code]=db.meta.prices[t.code].name}
+  if(f.remind&&!old)remindDone(f.remind.id,f.remind.date,t.amount);
   if(!old){m.lastType=f.type;if(t.type==='transfer')m.lastKind=t.kind;if(f.type==='card')m.lastSub=f.sub}
   save();closeSheet(n);toast(old?'已更新':'已記下');
 }
@@ -781,14 +936,16 @@ function renderConfirm(t){
   else if(t.type==='income'){const c=catFor(t);line=`存進 ${an(t.accountId)}`;sub=`${c.icon} ${esc(c.name)}收入`;cls='inc'}
   else if(t.type==='transfer'){const k=KIND[t.kind]||KIND.transfer;line=`${an(t.accountId)} → ${an(t.toAccountId)}`;sub=`${k.icon} ${k.label}`;cls='mov'}
   else if(t.type==='topup'){const c=card(t.cardId);line=`從 ${an(t.accountId)} 儲值`;sub=`${c.icon} ${esc(c.name)}`;cls='card'}
+  else if(t.type==='buy'){line=`從 ${an(t.accountId)} 買進`;sub=`📈 ${stockLabel(t.code)}　${t.shares.toLocaleString('zh-TW')} 股`;cls='invest'}
+  else if(t.type==='sell'){line=`賣出，存進 ${an(t.accountId)}`;sub=`💹 ${stockLabel(t.code)}　${t.shares.toLocaleString('zh-TW')} 股`;cls='invest'}
   else{const c=card(t.cardId);line=`${c.icon} ${esc(c.name)} 扣款`;cls='exp'}
   return`<div class="cf"><h2>${t.id&&db.tx.some(x=>x.id===t.id)?'確認修改':'確認這筆紀錄'}</h2><div class="cf-line">${line}</div><div class="cf-amt ${cls}">${money(t.amount)}</div><div class="cf-sub">${[sub,ds].filter(Boolean).join('　')}</div>${t.note?`<div class="cf-note">${esc(t.note)}</div>`:''}
   <div class="btn2"><button class="btn ghost" data-a="close">返回修改</button><button class="btn" data-a="confirmTx">確定記下</button></div></div>`;
 }
 function editTx(id){
   const t=db.tx.find(x=>x.id===id);if(!t)return;
-  const isCard=t.type==='topup'||t.type==='ride';
-  const f={type:isCard?'card':t.type,sub:t.type==='ride'?'ride':'topup',expr:String(t.amount),categoryId:t.categoryId,accountId:t.accountId,toAccountId:t.toAccountId,cardId:t.cardId,kind:t.kind||'transfer',date:t.date,note:t.note||'',editId:t.id};
+  const isCard=t.type==='topup'||t.type==='ride',isInv=t.type==='buy'||t.type==='sell';
+  const f={type:isCard?'card':isInv?'invest':t.type,isub:t.type==='sell'?'sell':'buy',code:t.code||'',shares:t.shares?String(t.shares):'',sub:t.type==='ride'?'ride':'topup',expr:String(t.amount),categoryId:t.categoryId,accountId:t.accountId,toAccountId:t.toAccountId,cardId:t.cardId,kind:t.kind||'transfer',date:t.date,note:t.note||'',editId:t.id};
   applyDefaults(f);openSheet(addSheet(f));
 }
 
@@ -878,6 +1035,129 @@ function checkEnded(){
     <div class="cf-sub">預算 ${money(b.amount)}，實際花了 ${money(st.spent)}</div>
     <div class="btn2"><button class="btn ghost" data-a="endView">看明細</button><button class="btn" data-a="endOk">知道了</button></div></div>`});
 }
+/* ---------- 投資頁面 ---------- */
+const m0=(v,sign)=>money(Math.round(v),sign);
+function plText(v,base){return v==null?'—':`${m0(v,true)}${base>0?`（${v>0?'+':''}${pct(v,base)}）`:''}`}
+function renderInvest(){
+  const S=investSummary(),codes=S.held.map(h=>h.code);
+  let h=head('📈 投資',undefined,`<button class="txt" data-a="invRefresh">更新股價</button>`)+`<div class="sh-body">
+    <div class="inv-sum"><small>${S.value!=null?'目前市值':'投入成本'}</small><b class="num">${m0(S.value!=null?S.value:S.cost)}</b>
+      ${S.value!=null&&S.held.length?`<span class="${plCls(S.pl)}">未實現損益 ${plText(S.pl,S.cost)}</span>`:''}
+      <div class="inv-meta"><span>投入成本 ${m0(S.cost)}</span>${S.realized?`<span>已實現損益 <em class="${plCls(S.realized)}">${m0(S.realized,true)}</em></span>`:''}</div>
+    </div>
+    <div class="btn2"><button class="btn inv" data-a="invAdd" data-v="buy">買進</button><button class="btn ghost" data-a="invAdd" data-v="sell">賣出</button></div>
+    <p class="hint">${priceTimeLabel(codes)}</p>`;
+  if(!S.hs.length)return h+`<div class="empty">還沒有投資紀錄。<br>按「買進」記下第一筆，例如定期定額買的 0050。</div></div>`;
+  if(S.held.length)h+=`<div class="lbl">持有中</div><div class="group">${S.held.map(x=>stockRow(x)).join('')}</div>`;
+  const out=S.hs.filter(x=>x.shares<=0);
+  if(out.length)h+=`<div class="lbl">已全部賣出</div><div class="group">${out.map(x=>`<button class="row" data-a="stockDetail" data-v="${x.code}"><span class="ico inv">💹</span><span class="rt"><b>${stockLabel(x.code)}</b><small>已實現損益</small></span><span class="ra ${plCls(x.realized)}">${m0(x.realized,true)}</span>${ICON_CHEV}</button>`).join('')}</div>`;
+  return h+`<p class="hint">買股票算成從銀行「轉移」到投資，不算支出；股票市值不算在總餘額裡。損益顏色照台股習慣：紅色是賺、綠色是賠。</p></div>`;
+}
+function stockRow(x){
+  return`<button class="row" data-a="stockDetail" data-v="${x.code}"><span class="ico inv">📈</span><span class="rt"><b>${stockLabel(x.code)}</b><small>${x.shares.toLocaleString('zh-TW')} 股　均價 ${money(x.avg)}${x.price!=null?`　現價 ${money(x.price)}`:''}</small></span>
+    <span class="rv2"><b>${m0(x.value!=null?x.value:x.cost)}</b><small class="${plCls(x.pl)}">${x.pl!=null?m0(x.pl,true):'成本'}</small></span>${ICON_CHEV}</button>`;
+}
+function renderStock(code){
+  const x=holdingsMap()[code];
+  if(!x)return head(esc(code))+'<div class="sh-body"><div class="empty">沒有這檔股票的紀錄。</div></div>';
+  const cells=[['持有股數',x.shares.toLocaleString('zh-TW')+' 股'],['平均成本',money(x.avg)],['目前股價',x.price!=null?money(x.price):'—'],
+    ['投入成本',m0(x.cost)],['目前市值',x.value!=null?m0(x.value):'—'],['未實現損益',x.pl!=null?`<em class="${plCls(x.pl)}">${m0(x.pl,true)}</em>`:'—']];
+  return head(stockLabel(code))+`<div class="sh-body">
+    <div class="kv">${cells.map(([k,v])=>`<div><small>${k}</small><b>${v}</b></div>`).join('')}</div>
+    ${x.realized?`<p class="hint" style="padding-top:2px">已實現損益（之前賣出的部分）：<b class="${plCls(x.realized)}">${m0(x.realized,true)}</b></p>`:''}
+    <div class="btn2" style="margin-top:6px"><button class="btn inv" data-a="invAdd" data-v="buy" data-k="${code}">買進</button><button class="btn ghost" data-a="invAdd" data-v="sell" data-k="${code}">賣出</button></div>
+    <div class="lbl" style="margin-top:16px">買賣紀錄</div>${groupedList([...x.txs].sort(cmpTx),{})}
+    <p class="hint">平均成本 = 目前持股的投入成本 ÷ 股數。賣出時，用平均成本算出賣掉部分的成本，入帳金額減掉這個成本就是這次的賺賠。</p></div>`;
+}
+
+/* ---------- 定期提醒 ---------- */
+const FREQ_LABEL={week:'每週',month:'每月',year:'每年'};
+const REM_TYPES={expense:'支出',income:'收入',transfer:'轉移',buy:'買股票'};
+const REM_ICON={expense:'🧾',income:'💰',transfer:'🔁',buy:'📈'};
+const dim=(y,m)=>new Date(y,m+1,0).getDate();
+/* 某個日期當天或之前，最近的一次提醒日 */
+function occOnOrBefore(r,d){
+  d=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  if(r.freq==='week')return addDays(d,-((((d.getDay()+6)%7)-r.wday+7)%7));
+  if(r.freq==='year'){let y=d.getFullYear(),c=new Date(y,r.month,Math.min(r.day,dim(y,r.month)));if(c>d){y--;c=new Date(y,r.month,Math.min(r.day,dim(y,r.month)))}return c}
+  let y=d.getFullYear(),m=d.getMonth(),c=new Date(y,m,Math.min(r.day,dim(y,m)));
+  if(c>d){m--;if(m<0){m=11;y--}c=new Date(y,m,Math.min(r.day,dim(y,m)))}return c;
+}
+/* 某個日期之後，下一次的提醒日 */
+function occAfter(r,d){
+  d=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  if(r.freq==='week')return addDays(occOnOrBefore(r,d),7);
+  const y=d.getFullYear(),m=d.getMonth();
+  if(r.freq==='year'){const c=new Date(y,r.month,Math.min(r.day,dim(y,r.month)));return c>d?c:new Date(y+1,r.month,Math.min(r.day,dim(y+1,r.month)))}
+  const c=new Date(y,m,Math.min(r.day,dim(y,m)));if(c>d)return c;
+  const n=new Date(y,m+1,1);return new Date(n.getFullYear(),n.getMonth(),Math.min(r.day,dim(n.getFullYear(),n.getMonth())));
+}
+function remPending(r){
+  const t=parseD(today()),first=occAfter(r,parseD(r.doneUntil));
+  if(first>t)return null;
+  let n=0,d=first;while(d<=t&&n<60){n++;d=occAfter(r,d)}
+  return{date:ymd(first),count:n};
+}
+function remNext(r){const p=remPending(r);if(p)return p.date;return ymd(occAfter(r,occOnOrBefore(r,parseD(today()))))}
+function remDesc(r){
+  const when=r.freq==='week'?`每週${WEEKDAYS[r.wday]}`:r.freq==='year'?`每年 ${r.month+1}/${r.day}`:`每月 ${r.day} 日`;
+  let what=REM_TYPES[r.type]||'';
+  if(r.type==='expense'||r.type==='income'){const c=(db.categories[r.type]||[]).find(x=>x.id===r.categoryId);if(c)what=c.name}
+  if(r.type==='buy'&&r.code)what=`買 ${r.code}`;
+  return`${when}・${what}・${r.type==='transfer'?`${accName(r.accountId)} → ${accName(r.toAccountId)}`:accName(r.accountId)}`;
+}
+function remindDone(id,date,amount){
+  const r=db.reminders.find(x=>x.id===id);if(!r)return;
+  if(date>r.doneUntil)r.doneUntil=date;if(amount)r.amount=amount;
+}
+function dueLabel(d){const n=Math.round((parseD(today())-parseD(d))/864e5);return`${md(parseD(d))}（${n===0?'今天':n+' 天前'}）`}
+function remDueList(){return db.reminders.map(r=>({r,p:remPending(r)})).filter(x=>x.p&&x.r.snooze!==today())}
+function renderRemindPop(){
+  const due=db.reminders.map(r=>({r,p:remPending(r)})).filter(x=>x.p);
+  if(!due.length)return`<div class="cf"><h2>定期提醒</h2><div class="cf-line" style="margin:8px 0 4px">都處理完了 ✓</div><div class="btn2" style="grid-template-columns:1fr"><button class="btn" data-a="remClose">完成</button></div></div>`;
+  return`<div class="cf"><h2>該記帳了</h2><div class="rem-list">${due.map(({r,p})=>`<div class="rem"><span class="ico ${r.type==='buy'?'inv':r.type==='income'?'inc':r.type==='transfer'?'mov':'exp'}">${REM_ICON[r.type]}</span>
+    <span class="rt"><b>${esc(r.name)}</b><small>${dueLabel(p.date)}${p.count>1?`　還有 ${p.count-1} 次沒記`:''}</small></span>
+    <span class="rem-b"><button class="mini" data-a="remSkip" data-v="${r.id}">略過</button><button class="mini pri" data-a="remRec" data-v="${r.id}">記一筆</button></span></div>`).join('')}</div>
+    <div class="btn2" style="grid-template-columns:1fr"><button class="btn ghost" data-a="remLater">晚點再說</button></div>
+    <p class="hint" style="text-align:center;padding:8px 0 0">「略過」代表這次不用記，例如這期沒有扣款。</p></div>`;
+}
+function checkReminders(){
+  if(sheets.length||!remDueList().length)return false;
+  openSheet({ov:'center',cls:()=>'dialog',remPop:true,render:renderRemindPop});return true;
+}
+function remSheet(id){
+  const r=id?db.reminders.find(x=>x.id===id):null;
+  const f=r?{...r,amount:r.amount?String(r.amount):'',code:r.code||''}:{id:null,name:'',freq:'month',day:new Date().getDate(),month:new Date().getMonth(),wday:(new Date().getDay()+6)%7,
+    type:'buy',accountId:db.meta.last.invest&&acc(db.meta.last.invest)?db.meta.last.invest:db.accounts[0]?.id,toAccountId:db.accounts[1]?.id,categoryId:null,code:'',amount:''};
+  f.id=id||null;
+  return{f,render:()=>{
+    const T=f.type;
+    if((T==='expense'||T==='income')&&!(db.categories[T]||[]).some(c=>c.id===f.categoryId))f.categoryId=db.categories[T][0]?.id;
+    let when='';
+    if(f.freq==='week')when=`<select data-f="wday">${WEEKDAYS.map((w,i)=>`<option value="${i}" ${+f.wday===i?'selected':''}>星期${w}</option>`).join('')}</select>`;
+    else if(f.freq==='month')when=`<select data-f="day">${[...Array(31)].map((_,i)=>`<option value="${i+1}" ${+f.day===i+1?'selected':''}>每月 ${i+1} 日</option>`).join('')}</select>`;
+    else when=`<div class="drow"><select data-f="month">${[...Array(12)].map((_,i)=>`<option value="${i}" ${+f.month===i?'selected':''}>${i+1} 月</option>`).join('')}</select><select data-f="day">${[...Array(31)].map((_,i)=>`<option value="${i+1}" ${+f.day===i+1?'selected':''}>${i+1} 日</option>`).join('')}</select></div>`;
+    let what='';
+    if(T==='expense'||T==='income')what=`<div class="field"><span>分類</span><div class="chips wrap">${db.categories[T].map(c=>`<button class="chip ${f.categoryId===c.id?'on':''}" data-a="fSet" data-k="categoryId" data-v="${c.id}">${c.icon} ${esc(c.name)}</button>`).join('')}</div></div>
+      <div class="field"><span>${T==='expense'?'從哪個帳戶付':'存進哪個帳戶'}</span>${chipsW(db.accounts,'accountId',f.accountId)}</div>`;
+    else if(T==='transfer')what=`<div class="field"><span>從</span>${chipsW(db.accounts,'accountId',f.accountId)}</div><div class="field"><span>到</span>${chipsW(db.accounts,'toAccountId',f.toAccountId)}</div>`;
+    else what=`<label class="field"><span>股票代號</span><input data-f="code" value="${esc(f.code)}" maxlength="6" placeholder="0050" autocapitalize="characters" autocomplete="off"></label>
+      <div class="field"><span>從哪個帳戶扣款</span>${chipsW(db.accounts,'accountId',f.accountId)}</div>`;
+    return head(r?'編輯提醒':'新增提醒','<button class="txt" data-a="close">取消</button>')+`<div class="sh-body">
+      <label class="field"><span>名稱</span><input data-f="name" value="${esc(f.name)}" maxlength="10" placeholder="${T==='buy'?'0050 定期定額':'電信費'}"></label>
+      <div class="field"><span>多久一次</span><div class="seg">${Object.entries(FREQ_LABEL).map(([k,l])=>`<button class="${f.freq===k?'on':''}" data-a="remFreq" data-v="${k}">${l}</button>`).join('')}</div></div>
+      <div class="field"><span>哪一天提醒</span>${when}</div>
+      ${f.freq!=='week'&&+f.day>28?'<p class="hint" style="padding-top:0">沒有這一天的月份，會在月底那天提醒。</p>':''}
+      <div class="field"><span>要記什麼</span><div class="seg">${Object.entries(REM_TYPES).map(([k,l])=>`<button class="${T===k?'on':''}" data-a="remType" data-v="${k}">${l}</button>`).join('')}</div></div>
+      ${what}
+      <label class="field"><span>預設金額（選填）</span><input data-f="amount" value="${esc(f.amount)}" inputmode="decimal" placeholder="1000"></label>
+      <p class="hint" style="padding-top:0">到期後打開 App 會跳出提醒，按「記一筆」會先幫你填好帳戶、分類和金額，金額可以改成這次的實際數字，並記住下次使用。</p>
+      <button class="btn" data-a="saveRem">${r?'儲存':'新增提醒'}</button>
+      ${r?'<button class="btn danger" data-a="delRem">刪除提醒</button>':''}</div>`;
+  }};
+}
+function chipsW(list,key,cur){return`<div class="chips wrap">${list.map(x=>`<button class="chip ${cur===x.id?'on':''}" data-a="fSet" data-k="${key}" data-v="${x.id}">${x.icon} ${esc(x.name)}</button>`).join('')}</div>`}
+
 /* cards */
 function renderCardList(){
   return head('交通卡')+`<div class="sh-body"><div class="group">${db.cards.map(c=>`<button class="row" data-a="cardDetail" data-v="${c.id}"><span class="ico card">${c.icon}</span><span class="rt"><b>${esc(c.name)}</b></span><span class="ra" style="color:var(--card)">${money(cardBalance(c))}</span>${ICON_CHEV}</button>`).join('')}</div></div>`;
@@ -938,13 +1218,13 @@ function download(name,text,type){
 function markBackup(){db.meta.lastBackup=today();save();render()}
 function csvText(){
   const q=v=>{v=String(v??'');return/[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
-  const tl={expense:'支出',income:'收入',topup:'交通卡儲值',ride:'交通卡扣款'};
-  const rows=[['日期','類型','分類','金額','帳戶','轉入帳戶','交通卡','備註']];
+  const tl={expense:'支出',income:'收入',topup:'交通卡儲值',ride:'交通卡扣款',buy:'買進股票',sell:'賣出股票'};
+  const rows=[['日期','類型','分類','金額','帳戶','轉入帳戶','交通卡','備註','股票','股數']];
   [...db.tx].sort((a,b)=>a.date.localeCompare(b.date)||(a.created||0)-(b.created||0)).forEach(t=>{
     const type=t.type==='transfer'?(KIND[t.kind]||KIND.transfer).label:tl[t.type];
     const cat=(t.type==='expense'||t.type==='income'||t.type==='topup')?catFor(t).name:'';
     const an=id=>acc(id)?.name||'';
-    rows.push([t.date,type,cat,t.amount,t.type==='ride'?'':an(t.accountId),t.type==='transfer'?an(t.toAccountId):'',card(t.cardId)?.name||'',t.note]);
+    rows.push([t.date,type,cat,t.amount,t.type==='ride'?'':an(t.accountId),t.type==='transfer'?an(t.toAccountId):'',card(t.cardId)?.name||'',t.note,t.code?(t.code+' '+stockName(t.code)).trim():'',t.shares||'']);
   });
   return'﻿'+rows.map(r=>r.map(q).join(',')).join('\r\n');
 }
@@ -969,6 +1249,41 @@ const A={
   newBudget:()=>{if(db.budgets.length>=4)return toast('最多只能設定 4 個預算');openSheet(budgetSheet())},
   editBudget:(v,el)=>openSheet(budgetSheet(v,el.dataset.k==='d')),
   bAll:(v,el)=>{topSheet().f[el.dataset.k]=null;rs()},
+  invest:()=>{openSheet({render:renderInvest});fetchPrices(investSummary().held.map(h=>h.code))},
+  invRefresh:()=>{fetchPrices(investSummary().held.map(h=>h.code),true);rs()},
+  invAdd:(v,el)=>{const f=newForm('invest',{isub:v,code:el.dataset.k||''});openSheet(addSheet(f))},
+  stockDetail:v=>{openSheet({render:()=>renderStock(v)});fetchPrices([v])},
+  fISub:v=>{const f=topSheet().f;f.isub=v;rs()},
+  fCode:v=>{const f=topSheet().f;f.code=v;rs()},
+  remNew:()=>openSheet(remSheet()),
+  remEdit:v=>openSheet(remSheet(v)),
+  remFreq:v=>{topSheet().f.freq=v;rs()},
+  remType:v=>{const f=topSheet().f;f.type=v;rs()},
+  saveRem:()=>{
+    const f=topSheet().f,name=f.name.trim(),amt=numIn(f.amount),code=(f.code||'').toUpperCase();
+    if(!name)return toast('請輸入提醒名稱');
+    if(isNaN(amt)||amt<0)return toast('預設金額請輸入數字');
+    if(!acc(f.accountId))return toast('請選擇帳戶');
+    if(f.type==='transfer'&&(!acc(f.toAccountId)||f.toAccountId===f.accountId))return toast('請選擇兩個不同的帳戶');
+    if(f.type==='buy'&&!CODE_RE.test(code))return toast('請輸入正確的股票代號，例如 0050');
+    const yest=ymd(addDays(new Date(),-1)),old=f.id?db.reminders.find(x=>x.id===f.id):null;
+    const data={name,freq:f.freq,day:+f.day||1,month:+f.month||0,wday:+f.wday||0,type:f.type,accountId:f.accountId,
+      toAccountId:f.type==='transfer'?f.toAccountId:null,categoryId:(f.type==='expense'||f.type==='income')?f.categoryId:null,code:f.type==='buy'?code:'',amount:r2(amt)};
+    if(old)Object.assign(old,data,{doneUntil:old.doneUntil>yest?old.doneUntil:yest});
+    else db.reminders.push({id:uid(),...data,doneUntil:yest});
+    save();closeSheet();toast(old?'已儲存':'已新增提醒');
+  },
+  delRem:()=>{const f=topSheet().f;if(!confirm('確定要刪除這個提醒嗎？\n\n已經記下的帳不會受影響。'))return;db.reminders=db.reminders.filter(x=>x.id!==f.id);save();closeSheet();toast('已刪除提醒')},
+  remRec:v=>{
+    const r=db.reminders.find(x=>x.id===v),p=r&&remPending(r);if(!p)return;
+    const type=r.type==='buy'?'invest':r.type;
+    openSheet(addSheet(newForm(type,{date:p.date,accountId:r.accountId,toAccountId:r.toAccountId,categoryId:r.categoryId,code:r.code||'',isub:'buy',
+      kind:'transfer',expr:r.amount?String(r.amount):'',note:r.name,remind:{id:r.id,date:p.date}})));
+  },
+  remSkip:v=>{const r=db.reminders.find(x=>x.id===v),p=r&&remPending(r);if(!p)return;remindDone(v,p.date);save();
+    if(db.reminders.some(x=>remPending(x)))rs();else{closeSheet();setTimeout(checkEnded,500)}toast('已略過這次')},
+  remLater:()=>{db.reminders.forEach(r=>{if(remPending(r))r.snooze=today()});save();closeSheet();setTimeout(checkEnded,500)},
+  remClose:()=>{closeSheet();setTimeout(checkEnded,500)},
   bPeriod:v=>{const f=topSheet().f;f.period=v;f.review='';rs()},
   endOk:()=>{const s=topSheet(),b=db.budgets.find(x=>x.id===s.bid);if(b){b.endSeen=true;save()}closeSheet();setTimeout(checkEnded,500)},
   endView:()=>{const s=topSheet(),b=db.budgets.find(x=>x.id===s.bid);if(b){b.endSeen=true;save()}
@@ -1110,7 +1425,9 @@ document.addEventListener('click',e=>{
   if(!el){if(e.target.classList.contains('ov'))closeSheet();return}
   const fn=A[el.dataset.a];if(fn)fn(el.dataset.v,el);
 });
-const onField=e=>{const k=e.target.dataset?.f;if(k&&topSheet()?.f)topSheet().f[k]=e.target.value};
+const onField=e=>{const k=e.target.dataset?.f,f=topSheet()?.f;if(!k||!f)return;
+  if(k==='code'){const v=e.target.value.toUpperCase().replace(/[^0-9A-Z]/g,'');if(v!==e.target.value)e.target.value=v;f.code=v;if(e.type==='input'&&f.type==='invest')lookupName(f);return}
+  f[k]=e.target.value};
 document.addEventListener('input',onField);document.addEventListener('change',onField);
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList?.contains('note'))e.target.blur()});
 
@@ -1132,8 +1449,9 @@ history.replaceState({s:0},'');
 if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
 if('serviceWorker' in navigator&&location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 render();
-setTimeout(checkEnded,700);
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){render();setTimeout(checkEnded,400)}});
+const onOpen=()=>{if(!checkReminders())checkEnded()};
+setTimeout(onOpen,700);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){render();setTimeout(onOpen,400)}});
 </script>
 </body>
 </html>
